@@ -8,23 +8,6 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
 
-import nltk.corpus
-
-# medium_data = pd.read_csv('medium_data.csv')
-# medium_data['title'] = medium_data['title'].apply(lambda x: x.replace(u'\xa0',u' '))
-# medium_data['title'] = medium_data['title'].apply(lambda x: x.replace('\u200a',' '))
-
-# corpus = medium_data['title']
-# print(corpus[:20])
-
-# corpus = nltk.corpus.brown.sents()
-# corpus = corpus[:2000]
-
-# f = open("tone_v1.txt", 'r')
-# text_data = f.read()
-# corpus = [line.split() for line in text_data.split("\n")]
-# # corpus = corpus[:1000]
-
 df = pd.read_csv('grammer.csv')
 text = [x for x,y in zip(df.input.values, df.labels.values) if y==1] 
 
@@ -63,8 +46,8 @@ model.add(Bidirectional(LSTM(150)))
 model.add(Dense(total_words,activation = "softmax"))
 
 # print(model.summary())
-# adam = Adam(learning_rate=0.01)
-# model.compile(loss = 'categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
+adam = Adam(learning_rate=0.01)
+model.compile(loss = 'categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 # history = model.fit(xs, ys, epochs=40)
 
 # # save model
@@ -72,7 +55,7 @@ model.add(Dense(total_words,activation = "softmax"))
 # # del model
 # # model = load_model('main.keras')
 # model.save_weights('my_model.weights.h5')  # to store
-model.load_weights('my_model.weights.h5')
+# model.load_weights('my_model.weights.h5')
 
 # plot history
 # import matplotlib.pyplot as plt
@@ -89,7 +72,7 @@ model.load_weights('my_model.weights.h5')
 # #driver code
 while True:
     seed_text = input("Enter sentence:")
-    if seed_text == "q00":
+    if seed_text == "q00": #enter q00 to stop
         break
 
     next_words = 10
