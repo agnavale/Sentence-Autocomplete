@@ -48,7 +48,7 @@ model.add(Dense(total_words,activation = "softmax"))
 # print(model.summary())
 adam = Adam(learning_rate=0.01)
 model.compile(loss = 'categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
-# history = model.fit(xs, ys, epochs=40)
+history = model.fit(xs, ys, epochs=40)
 
 # # save model
 # # model.save('main.keras')
